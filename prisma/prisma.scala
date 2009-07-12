@@ -21,8 +21,8 @@ import scala.util.parsing.json.JSON.parseFull
 
         def list() = println("Following\n"+ formatListing)
 
-        def read(key:String):String = io.Source.fromURL("http://search.twitter.com/search.json?q="+key) mkString
-
+        def read(key:String):String = io.Source.fromURL("http://search.twitter.com/search.json?q="+key+ "&since="+lastAccess(key) ) mkString
+        def lastAccess(key: String): String =  "2009-07-09" //new Date(file(DEFAULT, key).lastModified)
         def search(key: String): String = getTexts(parseFull(read(key))) mkString "\n"
 
         def getTexts( p :Option[Any]): Seq[String] =  {
